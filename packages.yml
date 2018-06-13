@@ -57,3 +57,12 @@
             - "rdesktop"
             - "vlc"
             - "flash-plugin"
+            - "gcc"
+            - "gcc-c++"
+            - "kernel-devel"
+            - "python3-devel"
+            - "python-devel"
+            - "ncurses-compat-libs"
+            - "parcellite"
+        tags:
+            - install_pkgs
