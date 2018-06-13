@@ -64,5 +64,6 @@
             - "python-devel"
             - "ncurses-compat-libs"
             - "parcellite"
+            - "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
         tags:
             - install_pkgs
