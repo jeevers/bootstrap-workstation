@@ -60,10 +60,18 @@
             - "gcc"
             - "gcc-c++"
             - "kernel-devel"
+            - "python3"
             - "python3-devel"
             - "python-devel"
             - "ncurses-compat-libs"
             - "parcellite"
             - "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+            - "jq"
+            - "xscreensaver.x86_64"
+            - "xscreensaver-extras.x86_64"
+            - "xscreensaver-gl-extras.x86_64"
+            - "xscreensaver-extras-gss.x86_64"
+            - "xscreensaver-gl-extras-gss.x86_64"
+            - "rss-glx-xscreensaver.x86_64"
         tags:
             - install_pkgs

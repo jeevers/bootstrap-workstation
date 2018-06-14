@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  tasks:
+      - name: update pip (globally)
+        pip:
+            executable: pip3
+            name: pip
+            state: latest
+        become: true
+      - name: install pip packages
+        pip:
+            executable: pip3
+            extra_args: "--user"
+            name:
+                - ipython
+                - ansible
+                - awscli
+                - requests
+                - pipenv
+            state: latest
+

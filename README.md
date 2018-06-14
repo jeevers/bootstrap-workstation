@@ -1,2 +1,2 @@
 # USAGE
-ansible-playbook packages.yml
+ansible-playbook main.yml
