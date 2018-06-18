@@ -3,44 +3,44 @@
   connection: local
   become: true
   tasks:
-      - name: update all packages
+      - name: "packages.yml | update all packages"
         dnf:
             name: "*"
             state: latest
-      - name: install rpmfusion repos
+      - name: "packages.yml | install rpmfusion repos"
         dnf:
             name: "{{item}}"
             state: present
         with_items:
             - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-28.noarch.rpm"
             - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-28.noarch.rpm"
-      - name: install kubernetes repo
+      - name: "packages.yml | install kubernetes repo"
         copy:
             src: kubernetes.repo
             dest: /etc/yum.repos.d/kubernetes.repo
-      - name: install vs code repo
+      - name: "packages.yml | install vs code repo"
         copy:
             src: vscode.repo
             dest: /etc/yum.repos.d/vscode.repo
-      - name: install flash repo
+      - name: "packages.yml | install flash repo"
         dnf:
             name: "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
             state: present
-      - name: install slack
+      - name: "packages.yml | install slack"
         dnf:
             name: "{{item}}"
             state: latest
         with_items:
             - "https://downloads.slack-edge.com/linux_releases/slack-3.2.1-0.1.fc21.x86_64.rpm"
-      - name: install fakehal dep pm-utils, not in fedora repos (for the movies)
+      - name: "packages.yml | install fakehal dep pm-utils, not in fedora repos (for the movies)"
         dnf:
             name: "http://mirror.centos.org/centos/7/os/x86_64/Packages/pm-utils-1.4.1-27.el7.x86_64.rpm"
             state: present
-      - name: install fakehal (also for the movies)
+      - name: "packages.yml | install fakehal (also for the movies)"
         dnf:
             name: "https://wtogami.fedorapeople.org/fakehal/fedora/fakehal-0.5.14-8.fc20.x86_64.rpm"
             state: present
-      - name: install additional packages
+      - name: "packages.yml | install additional packages"
         dnf:
             name: "{{item}}"
             state: latest

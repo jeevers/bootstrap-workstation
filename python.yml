@@ -1,13 +1,13 @@
 - hosts: localhost
   connection: local
   tasks:
-      - name: update pip (globally)
+      - name: "python.yml | update pip (globally)"
         pip:
             executable: pip3
             name: pip
             state: latest
         become: true
-      - name: install pip packages
+      - name: "python.yml | install pip packages"
         pip:
             executable: pip3
             extra_args: "--user"
@@ -18,4 +18,3 @@
                 - requests
                 - pipenv
             state: latest
-
