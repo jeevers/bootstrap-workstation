@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+      - name: "rust.yml | download rustup init script"
+        get_url:
+            url: https://sh.rustup.rs
+            dest: /tmp/rustup_init.sh
+            mode: 0700
+      - name: "rust.yml | run automatic rust installer"
+        command: "/tmp/rustup_init.sh -y"
+        args:
+            creates: "~/.cargo/bin/rustup"
