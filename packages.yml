@@ -14,14 +14,19 @@
         with_items:
             - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-28.noarch.rpm"
             - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-28.noarch.rpm"
-      - name: "packages.yml | install kubernetes repo"
+      - name: "packages.yml | install repos"
         copy:
-            src: kubernetes.repo
-            dest: /etc/yum.repos.d/kubernetes.repo
-      - name: "packages.yml | install vs code repo"
-        copy:
-            src: vscode.repo
-            dest: /etc/yum.repos.d/vscode.repo
+            src: "{{item.src}}"
+            dest: "{{item.dest}}" 
+        with_items:
+            - src: kubernetes.repo
+              dest: /etc/yum.repos.d/kubernetes.repo
+            - src: vscode.repo
+              dest: /etc/yum.repos.d/vscode.repo
+            - src: dropbox.repo
+              dest: /etc/yum.repos.d/dropbox.repo
+            - src: google-chrome.repo
+              dest: /etc/yum.repos.d/google-chrome.repo
       - name: "packages.yml | install flash repo"
         dnf:
             name: "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
@@ -65,7 +70,7 @@
             - "python-devel"
             - "ncurses-compat-libs"
             - "parcellite"
-            - "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+            - "google-chrome-stable"
             - "jq"
             - "xscreensaver.x86_64"
             - "xscreensaver-extras.x86_64"
@@ -73,5 +78,6 @@
             - "xscreensaver-extras-gss.x86_64"
             - "xscreensaver-gl-extras-gss.x86_64"
             - "rss-glx-xscreensaver.x86_64"
+            - "nautilus-dropbox"
         tags:
             - install_pkgs
