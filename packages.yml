@@ -27,6 +27,8 @@
               dest: /etc/yum.repos.d/dropbox.repo
             - src: google-chrome.repo
               dest: /etc/yum.repos.d/google-chrome.repo
+            - src: docker-ce.repo
+              dest: /etc/yum.repos.d/docker-ce.repo
       - name: "packages.yml | install flash repo"
         dnf:
             name: "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
@@ -79,5 +81,6 @@
             - "xscreensaver-gl-extras-gss.x86_64"
             - "rss-glx-xscreensaver.x86_64"
             - "nautilus-dropbox"
+            - "docker-ce"
         tags:
             - install_pkgs
