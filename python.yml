@@ -17,4 +17,6 @@
                 - awscli
                 - requests
                 - pipenv
+                - pylint
+                - yamllint
             state: latest
