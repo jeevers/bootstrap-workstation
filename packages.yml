@@ -85,5 +85,6 @@
             - "nautilus-dropbox"
             - "docker-ce"
             - "bazel"
+            - "meld"
         tags:
             - install_pkgs
