@@ -29,6 +29,8 @@
               dest: /etc/yum.repos.d/google-chrome.repo
             - src: docker-ce.repo
               dest: /etc/yum.repos.d/docker-ce.repo
+            - src: _copr_vbatts-bazel.repo
+              dest: /etc/yum.repos.d/_copr_vbatts-bazel.repo
       - name: "packages.yml | install flash repo"
         dnf:
             name: "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
@@ -82,5 +84,6 @@
             - "rss-glx-xscreensaver.x86_64"
             - "nautilus-dropbox"
             - "docker-ce"
+            - "bazel"
         tags:
             - install_pkgs
