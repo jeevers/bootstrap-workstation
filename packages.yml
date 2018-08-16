@@ -31,6 +31,11 @@
               dest: /etc/yum.repos.d/docker-ce.repo
             - src: _copr_vbatts-bazel.repo
               dest: /etc/yum.repos.d/_copr_vbatts-bazel.repo
+      - name: download repos and gpgs from urls
+        get_url:
+            url: "{{item.src}}"
+            dest: "{{item.dest}}"
+        with_items:
             - src: https://pkg.osquery.io/rpm/osquery-s3-rpm.repo
               dest: /etc/yum.repos.d/osquery-s3-rpm.repo
             - src: https://pkg.osquery.io/rpm/GPG
@@ -95,5 +100,6 @@
             - "HandBrake"
             - "HandBrake-gui"
             - "osquery"
+            - "minicom"
         tags:
             - install_pkgs
