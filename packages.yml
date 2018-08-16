@@ -92,6 +92,8 @@
             - "docker-ce"
             - "bazel"
             - "meld"
+            - "HandBrake"
+            - "HandBrake-gui"
             - "osquery"
         tags:
             - install_pkgs
