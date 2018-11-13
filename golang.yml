@@ -1,14 +1,26 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+      go_version: "1.11.2"
   tasks:
+      - name: get current golang installation
+        stat:
+            path: /usr/local/go
+        register:
+            golang
+      - name: remove current golang installation
+        file:
+            path: /usr/local/go
+            state: absent
+        when: golang is defined and golang.stat.exists
       - name: "golang.yml | download golang distribution"
         get_url:
-            url: "https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz"
-            dest: /tmp/go.linux-amd64.tar.gz
+            url: "https://dl.google.com/go/go{{go_version}}.linux-amd64.tar.gz"
+            dest: "/tmp/go{{go_version}}.linux-amd64.tar.gz"
       - name: "golang.yml | extract to /usr/local"
         unarchive:
             remote_src: yes
-            src: /tmp/go.linux-amd64.tar.gz
+            src: "/tmp/go{{go_version}}.linux-amd64.tar.gz"
             dest: /usr/local/
         become: yes
