@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   connection: local
+  become: true
   vars:
       go_version: "1.11.2"
   tasks:
