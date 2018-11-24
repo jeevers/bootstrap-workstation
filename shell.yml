@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+      - name: clone powerline fonts
+        git:
+            repo: "https://github.com/powerline/fonts.git"
+            dest: "{{ansible_env.HOME}}/misc_dev/powerline-fonts"
+      - name: install fonts
+        command: "/bin/sh install.sh"
+        args:
+            chdir: "{{ansible_env.HOME}}/misc_dev/powerline-fonts"
+            creates: "{{ansible_env.HOME}}/.cache/fontconfig"
+      - name: clone Vundle repo
+        git:
+            repo: "https://github.com/gmarik/Vundle.vim.git"
+            dest: "{{ansible_env.HOME}}/.vim/bundle/Vundle.vim"
+      #- name: copy vimrc
+      #  get_url:
+      #      url: "https://raw.githubusercontent.com/jeevers/vimconfigs/master/vimrc"
+      #      dest: "{{ansible_env.HOME}}/.vimrc"
+      #      mode: 0600
+      - name: get vimrc info
+        stat:
+            path: "{{ansible_env.HOME}}/.vimrc"
+        register: vimrc
+      - name: get bundle info
+        stat:
+            path: "{{ansible_env.HOME}}/.vim/bundle/YouCompleteMe"
+        register: bundle
+      - name: create initial vimrc
+        template:
+            src: vimrc_bundles.j2
+            dest: "{{ansible_env.HOME}}/.vimrc"
+            backup: true
+        when: not bundle.stat.exists 
+      - name: install bundles
+        command: "vim +BundleInstall -c q -c q"
+        args:
+            creates: "{{ansible_env.HOME}}/.vim/bundle/YouCompleteMe"
+        when: not bundle.stat.exists 
+      - name: create actual vimrc
+        template:
+            src: vimrc.j2
+            dest: "{{ansible_env.HOME}}/.vimrc"
+      - name: ensure YCM prereqs are installed
+        package:
+            name:
+                - cmake
+                - python3-devel
+            state: installed
+        become: true
+      - name: compile YCM
+        command: "python3 install.py --clang-completer --go-completer --rust-completer"
+        args:
+            chdir: "{{ansible_env.HOME}}/.vim/bundle/YouCompleteMe"
