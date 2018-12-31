@@ -54,3 +54,55 @@
         command: "python3 install.py --clang-completer --go-completer --rust-completer"
         args:
             chdir: "{{ansible_env.HOME}}/.vim/bundle/YouCompleteMe"
+      
+      - name: set cli autocompletions
+        lineinfile:
+            path: "{{ansible_env.HOME}}/.bashrc"
+            line: "{{item}}"
+            state: present
+        with_items:
+            - "complete -C $(which aws_completer) aws"
+            - "source <($(which gopass) completion bash)"
+            - "source <($(which pipenv) --completion)"
+        tags:
+            - bashrc
+      
+      - name: copy functions file
+        copy:
+            src: functions.sh
+            dest: "{{ansible_env.HOME}}/.functions"
+        tags:
+            - bashrc
+
+      - name: source functions file in bashrc
+        lineinfile:
+            path: "{{ansible_env.HOME}}/.bashrc"
+            line: "{{item}}"
+            state: present
+        with_items:
+            - "source $HOME/.functions"
+        tags:
+            - bashrc
+      
+      - name: setup powerline
+        blockinfile:
+            path: "{{ansible_env.HOME}}/.bashrc"
+            block: |
+                powerline-daemon -q
+                POWERLINE_BASH_CONTINUATION=1
+                POWERLINE_BASH_SELECT=1
+                . {{ansible_env.HOME}}/.local/lib/python$(python3 --version |awk '{print $2}' |awk -F. '{print $1"."$2}')/site-packages/powerline/bindings/bash/powerline.sh
+        tags:
+            - powerline
+            - bashrc
+      - name: set bash_profile PATHs
+        lineinfile:
+            path: "{{ansible_env.HOME}}/.bash_profile"
+            line: "{{item}}"
+        with_items:
+            - export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+            - export PATH="$HOME/.cargo/bin:$PATH"
+            - export PATH="/usr/local/go/bin:$PATH"
+        tags:
+            - bash_profile
+
