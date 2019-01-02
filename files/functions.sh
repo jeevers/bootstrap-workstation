@@ -62,3 +62,18 @@ function neighbordump { #will dump either CDP or LLDP packets, whatever comes fi
         sudo tcpdump -v -s 1500 -c 1 '(ether[12:2]=0x88cc or ether[20:2]=0x2000)'
     fi
 }
+
+function py3init {
+    if [ ! -e ./Pipfile ]
+    then
+        pipenv --three
+    fi
+
+    if  [ ! -e ./.envrc ]
+    then
+        echo '. $(pipenv --venv)/bin/activate' >> ./.envrc
+        direnv allow
+    fi
+}
+
+
