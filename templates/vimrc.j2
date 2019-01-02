@@ -10,6 +10,10 @@ set number
 set encoding=utf-8
 set cursorline
 set cursorcolumn
+set colorcolumn=80
+"highlight trailing space
+highlight ExtraWhiteSpace ctermbg=red guibg=red
+match ExtraWhiteSpace /\s\+$/
 "autocmd FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
 let delimitMate_expand_cr=1
 let g:vim_markdown_folding_disabled=1
@@ -24,6 +28,7 @@ autocmd FileType python :nnoremap E :w <Bar> !python %<CR>
 autocmd FileType go :nnoremap E :w <Bar> GoRun<CR>
 autocmd FileType sh :nnoremap E :w <Bar> !./%<CR>
 autocmd FileType rust :nnoremap E :w <Bar> !cargo run %<CR>
+au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
 "nerdtree stuff
 "autocmd VimEnter * NERDTree
