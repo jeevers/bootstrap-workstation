@@ -2,3 +2,4 @@
 - import_playbook: "python.yml"
 - import_playbook: "rust.yml"
 - import_playbook: "golang.yml"
+- import_playbook: "shell.yml"
