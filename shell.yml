@@ -66,7 +66,7 @@
             - 'eval "$(direnv hook bash)"'
             - "complete -C $(which aws_completer) aws"
             - "export AWS_SDK_LOAD_CONFIG=1"
-            - "source <($(which gopass) completion bash)"
+            #- "source <($(which gopass) completion bash)"
             - "source <($(which pipenv) --completion)"
             - "source <($(which kubectl) completion bash)"
         tags:

@@ -10,8 +10,8 @@
       - name: "packages.yml | install rpmfusion repos"
         dnf:
             name:
-                - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm"
-                - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm"
+                - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+                - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
             state: present
       - name: "packages.yml | install repos"
         copy:
@@ -48,7 +48,7 @@
             name: "{{item}}"
             state: latest
         with_items:
-            - "https://downloads.slack-edge.com/linux_releases/slack-3.2.1-0.1.fc21.x86_64.rpm"
+            - "https://downloads.slack-edge.com/linux_releases/slack-4.3.2-0.1.fc21.x86_64.rpm"
       - name: "packages.yml | install fakehal dep pm-utils, not in fedora repos (for the movies)"
         dnf:
             name: "http://mirror.centos.org/centos/7/os/x86_64/Packages/pm-utils-1.4.1-27.el7.x86_64.rpm"
@@ -59,14 +59,14 @@
             state: present
       - name: "packages.yml | install additional packages"
         dnf:
-            name: "{{item}}"
+            name:
                 - "git"
                 - "terminator"
                 - "@Development Tools"
                 - "steam"
                 - "libnsl.i686"
                 - "mesa-dri-drivers"
-                - "https://github.com/gopasspw/gopass/releases/download/v1.8.1/gopass-1.8.1-linux-amd64.rpm"
+               #- "https://github.com/gopasspw/gopass/releases/download/v1.8.1/gopass-1.8.1-linux-amd64.rpm"
                 - "kubectl"
                 - "direnv"
                 - "code"
